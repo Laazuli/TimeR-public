@@ -5,15 +5,15 @@ import java.util.Date;
 public class SystemTimeTimer implements Timer {
     private boolean running = false;
     private long lastStartTime;
-    private int passedTimeBeforeLastStart = 0;
+    private long passedTimeBeforeLastStart = 0;
 
     @Override
-    public int get() {
+    public long getMillis() {
         return running ? timeSinceLastStart() + passedTimeBeforeLastStart : passedTimeBeforeLastStart;
     }
 
     @Override
-    public void set(int milliseconds) {
+    public void set(long milliseconds) {
         if (milliseconds < 0) return;
 
         passedTimeBeforeLastStart = milliseconds;
@@ -22,12 +22,14 @@ public class SystemTimeTimer implements Timer {
 
     @Override
     public void run() {
+        if (running) return;
         running = true;
         this.lastStartTime = currentDateTime();
     }
 
     @Override
     public void pause() {
+        if (!running) return;
         running = false;
         passedTimeBeforeLastStart += timeSinceLastStart();
     }

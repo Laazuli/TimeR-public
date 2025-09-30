@@ -1,9 +1,9 @@
 package me.laazuli.timer.time;
 
 public interface Timer {
-    int get();
+    long getMillis();
 
-    void set(int milliseconds);
+    void set(long milliseconds);
 
     void run();
 
