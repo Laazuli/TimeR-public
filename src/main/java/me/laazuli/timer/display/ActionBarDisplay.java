@@ -1,13 +1,15 @@
 package me.laazuli.timer.display;
 
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 
 public class ActionBarDisplay implements Display {
+    private final Player player;
     private String text;
 
-    public ActionBarDisplay(String text) {
-        this.text = text;
+    public ActionBarDisplay(Player player) {
+        this.player = player;
+        this.text = "";
     }
 
     @Override
@@ -16,7 +18,7 @@ public class ActionBarDisplay implements Display {
     }
 
     @Override
-    public void render(LocalPlayer player) {
-        player.displayClientMessage(Component.literal(text), true);
+    public void render(int x, int y, int width, int height) {
+        this.player.displayClientMessage(Component.literal(text), true);
     }
 }
