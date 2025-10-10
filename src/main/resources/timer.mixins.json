@@ -1,0 +1,6 @@
+{
+  "package": "me.laazuli.timer.mixin",
+  "client": [
+    "GuiMixin"
+  ]
+}

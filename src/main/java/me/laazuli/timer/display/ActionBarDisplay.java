@@ -1,5 +1,7 @@
 package me.laazuli.timer.display;
 
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
@@ -18,7 +20,13 @@ public class ActionBarDisplay implements Display {
     }
 
     @Override
-    public void render(int x, int y, int width, int height) {
+    public void setX(int x) {}
+
+    @Override
+    public void setY(int y) {}
+
+    @Override
+    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         this.player.displayClientMessage(Component.literal(text), true);
     }
 }
