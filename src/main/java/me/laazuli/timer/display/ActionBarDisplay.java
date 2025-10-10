@@ -1,22 +1,16 @@
 package me.laazuli.timer.display;
 
+import me.laazuli.timer.time.Timer;
 import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
 
 public class ActionBarDisplay implements Display {
-    private final Player player;
-    private String text;
+    private final Timer timer;
 
-    public ActionBarDisplay(Player player) {
-        this.player = player;
-        this.text = "";
-    }
-
-    @Override
-    public void setText(String text) {
-        this.text = text;
+    public ActionBarDisplay(Timer timer) {
+        this.timer = timer;
     }
 
     @Override
@@ -27,6 +21,6 @@ public class ActionBarDisplay implements Display {
 
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
-        this.player.displayClientMessage(Component.literal(text), true);
+        Minecraft.getInstance().player.displayClientMessage(Component.literal(Display.formatTimer(timer)), true);
     }
 }
