@@ -9,6 +9,7 @@ import me.laazuli.timer.time.Timer;
 import net.fabricmc.api.ClientModInitializer;
 
 public class TimeR implements ClientModInitializer {
+    public static final String MOD_ID = "timer";
 
     public static final Timer TIMER = new SystemTimeTimer();
 
