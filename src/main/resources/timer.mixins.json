@@ -1,7 +1,7 @@
 {
   "package": "me.laazuli.timer.mixin",
   "client": [
-    "GuiMixin",
-    "PauseScreenMixin"
+    "AddTimerLayer",
+    "AddTimerSettingsButton"
   ]
 }
