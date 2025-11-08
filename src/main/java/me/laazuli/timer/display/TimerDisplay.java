@@ -4,12 +4,18 @@ import me.laazuli.timer.time.Timer;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 
-public interface Display {
+public interface TimerDisplay {
 //    void setText(String text);
 
     void setX(int x);
 
     void setY(int y);
+
+    int getX();
+
+    int getY();
+
+    void initialize();
 
     void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker);
 

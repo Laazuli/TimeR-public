@@ -6,10 +6,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
-public class ActionBarDisplay implements Display {
+public class ActionBarTimerDisplay implements TimerDisplay {
     private final Timer timer;
 
-    public ActionBarDisplay(Timer timer) {
+    public ActionBarTimerDisplay(Timer timer) {
         this.timer = timer;
     }
 
@@ -20,7 +20,22 @@ public class ActionBarDisplay implements Display {
     public void setY(int y) {}
 
     @Override
+    public int getX() {
+        return -1;
+    }
+
+    @Override
+    public int getY() {
+        return -1;
+    }
+
+    @Override
+    public void initialize() {
+
+    }
+
+    @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
-        Minecraft.getInstance().player.displayClientMessage(Component.literal(Display.formatTimer(timer)), true);
+        Minecraft.getInstance().player.displayClientMessage(Component.literal(TimerDisplay.formatTimer(timer)), true);
     }
 }
