@@ -1,6 +1,7 @@
 package me.laazuli.timer.mixin;
 
 import me.laazuli.timer.TimeR;
+import me.laazuli.timer.time.Timer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.LayeredDraw;
@@ -26,7 +27,7 @@ public class AddTimerRenderLayer {
         LayeredDraw timerLayer = new LayeredDraw();
 
         timerLayer.add((guiGraphics, deltaTracker) -> {
-            TimeR.DISPLAY.setMessage(Component.literal(TimeR.formatTimer(TimeR.TIMER)));
+            TimeR.DISPLAY.setMessage(Component.literal(Timer.formatTimer(TimeR.TIMER)));
             TimeR.DISPLAY.render(guiGraphics, -1, -1, deltaTracker.getRealtimeDeltaTicks());
         });
 

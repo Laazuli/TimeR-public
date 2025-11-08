@@ -29,8 +29,4 @@ public class TimeR implements ClientModInitializer {
 
         TIMER_COMMAND.register();
     }
-
-    public static String formatTimer(Timer timer) {
-        return String.format("%02d:%02d:%02d", timer.getHours(), timer.getMinutes()%60 , timer.getSeconds()%60);
-    }
 }

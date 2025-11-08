@@ -26,4 +26,8 @@ public interface Timer {
     }
 
     boolean isRunning();
+
+    static String formatTimer(Timer timer) {
+        return String.format("%02d:%02d:%02d", timer.getHours(), timer.getMinutes()%60 , timer.getSeconds()%60);
+    }
 }
