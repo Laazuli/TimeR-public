@@ -1,7 +1,7 @@
 package me.laazuli.timer.mixin;
 
 import me.laazuli.timer.TimeR;
-import me.laazuli.timer.screen.TimerSettingsScreen;
+import me.laazuli.timer.gui.screen.TimerSettingsScreen;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.SpriteIconButton;
 import net.minecraft.client.gui.screens.PauseScreen;
