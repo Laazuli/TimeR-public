@@ -13,7 +13,7 @@ import net.minecraft.network.chat.Component;
 public class TimerSettingsScreen extends Screen {
     private final Screen last;
 
-    private final DraggableStringWidget timerWidget = new DraggableStringWidget(Component.literal(Timer.formatTimer(TimeR.TIMER)), Minecraft.getInstance().font);
+    private DraggableStringWidget timerWidget;
 
     public TimerSettingsScreen(Screen last) {
         super(Component.literal("TimeR Settings"));
@@ -22,7 +22,8 @@ public class TimerSettingsScreen extends Screen {
 
     @Override
     protected void init() {
-        timerWidget.setPosition(TimeR.RENDERER.x, TimeR.RENDERER.y);
+        this.timerWidget = new DraggableStringWidget(Component.literal(Timer.formatTimer(TimeR.TIMER)), Minecraft.getInstance().font, () -> this.width, () -> this.height);
+        this.timerWidget.setPosition(TimeR.RENDERER.x, TimeR.RENDERER.y);
         this.addRenderableWidget(this.timerWidget);
     }
 
