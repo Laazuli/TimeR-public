@@ -22,7 +22,7 @@ public class TimerSettingsScreen extends Screen {
 
     @Override
     protected void init() {
-        timerWidget.setPosition(TimeR.DISPLAY_X, TimeR.DISPLAY_Y);
+        timerWidget.setPosition(TimeR.RENDERER.x, TimeR.RENDERER.y);
         this.addRenderableWidget(this.timerWidget);
     }
 
@@ -37,7 +37,7 @@ public class TimerSettingsScreen extends Screen {
     }
 
     public void saveOptions() {
-        TimeR.DISPLAY_X = this.timerWidget.getX();
-        TimeR.DISPLAY_Y = this.timerWidget.getY();
+        TimeR.RENDERER.x = this.timerWidget.getX();
+        TimeR.RENDERER.y = this.timerWidget.getY();
     }
 }
