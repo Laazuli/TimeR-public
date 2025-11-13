@@ -4,10 +4,10 @@ import me.laazuli.timer.command.TimerCommand;
 import me.laazuli.timer.time.SystemTimeTimer;
 import me.laazuli.timer.time.Timer;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.StringWidget;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
 public class TimeR implements ClientModInitializer {
@@ -15,18 +15,26 @@ public class TimeR implements ClientModInitializer {
 
     public static final Timer TIMER = new SystemTimeTimer();
 
-    public static AbstractWidget DISPLAY;
-//    public static final TimerDisplay DISPLAY = new StringWidgetTimerDisplay(TIMER);
-//    public static final Display DISPLAY = new ActionBarDisplay(TIMER);
+    public static int DISPLAY_X;
+    public static int DISPLAY_Y;
 
     public static final TimerCommand TIMER_COMMAND = new TimerCommand(TIMER);
 
     @Override
     public void onInitializeClient() {
-        ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
-            DISPLAY = new StringWidget(Component.literal("IF YOU SEE THIS, PLEASE CONTACT THE DEVELOPER!!"), Minecraft.getInstance().font);
+        HudRenderCallback.EVENT.register((guiGraphics, deltaTracker) -> {
+            TimeR.renderTimer(guiGraphics, deltaTracker, Minecraft.getInstance());
         });
 
         TIMER_COMMAND.register();
+    }
+
+    public static void renderTimer(GuiGraphics guiGraphics, DeltaTracker deltaTracker, Minecraft minecraft) {
+        minecraft.getProfiler().push("timer:timer");
+
+        String timerString = Timer.formatTimer(TIMER);
+        guiGraphics.drawStringWithBackdrop(minecraft.font, Component.literal(timerString), DISPLAY_X, DISPLAY_Y, minecraft.font.width(timerString), -1);
+
+        minecraft.getProfiler().pop();
     }
 }
