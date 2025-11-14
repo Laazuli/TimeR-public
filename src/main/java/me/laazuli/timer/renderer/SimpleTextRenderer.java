@@ -13,13 +13,29 @@ public class SimpleTextRenderer {
     public final String namespace;
     public final String id;
     public final Supplier<String> textSupplier;
-    public int x;
-    public int y;
+    private double xPercent;
+    private double yPercent;
 
     public SimpleTextRenderer(String namespace, String id, Supplier<String> textSupplier) {
         this.namespace = namespace;
         this.id = id;
         this.textSupplier = textSupplier;
+    }
+
+    public double getRelativeX() {
+        return xPercent;
+    }
+
+    public double getRelativeY() {
+        return yPercent;
+    }
+
+    public void setRelativeX(double relativeX) {
+        this.xPercent = Math.clamp(relativeX, 0, 100);
+    }
+
+    public void setRelativeY(double relativeY) {
+        this.yPercent = Math.clamp(relativeY, 0, 100);
     }
 
     public void register() {
@@ -31,7 +47,13 @@ public class SimpleTextRenderer {
     private void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker, Minecraft minecraft) {
         minecraft.getProfiler().push(TimeR.MOD_ID + "$" + this.id);
 
-        guiGraphics.drawStringWithBackdrop(minecraft.font, Component.literal(this.textSupplier.get()), this.x, this.y, minecraft.font.width(this.textSupplier.get()), -1);
+        guiGraphics.drawStringWithBackdrop(
+                minecraft.font,
+                Component.literal(this.textSupplier.get()),
+                (int) (this.xPercent * guiGraphics.guiWidth()),
+                (int) (this.yPercent * guiGraphics.guiHeight()),
+                minecraft.font.width(this.textSupplier.get()),
+                -1);
 
         minecraft.getProfiler().pop();
     }

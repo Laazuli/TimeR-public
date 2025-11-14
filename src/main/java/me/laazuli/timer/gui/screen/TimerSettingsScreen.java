@@ -23,7 +23,7 @@ public class TimerSettingsScreen extends Screen {
     @Override
     protected void init() {
         this.timerWidget = new DraggableStringWidget(Component.literal(Timer.formatTimer(TimeR.TIMER)), Minecraft.getInstance().font, () -> this.width, () -> this.height);
-        this.timerWidget.setPosition(TimeR.RENDERER.x, TimeR.RENDERER.y);
+        this.timerWidget.setPosition((int) (TimeR.RENDERER.getRelativeX() * this.width), (int) (TimeR.RENDERER.getRelativeY() * this.height));
         this.addRenderableWidget(this.timerWidget);
     }
 
@@ -38,7 +38,7 @@ public class TimerSettingsScreen extends Screen {
     }
 
     public void saveOptions() {
-        TimeR.RENDERER.x = this.timerWidget.getX();
-        TimeR.RENDERER.y = this.timerWidget.getY();
+        TimeR.RENDERER.setRelativeX((double) this.timerWidget.getX() / this.width);
+        TimeR.RENDERER.setRelativeY((double) this.timerWidget.getY() / this.height);
     }
 }
