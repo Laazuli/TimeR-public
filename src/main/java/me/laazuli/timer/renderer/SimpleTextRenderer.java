@@ -38,7 +38,7 @@ public class SimpleTextRenderer {
         this.yPercent = Math.clamp(relativeY, 0, 100);
     }
 
-    public void register() {
+    public void initialize() {
         HudRenderCallback.EVENT.register((guiGraphics, deltaTracker) -> {
             render(guiGraphics, deltaTracker, Minecraft.getInstance());
         });
