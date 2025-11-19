@@ -1,5 +1,6 @@
 package me.laazuli.timer.command;
 
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import me.laazuli.timer.time.Timer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
@@ -29,6 +30,17 @@ public class TimerCommand {
                                             .executes(this::pause)
                             )
                             .then(
+                                    ClientCommandManager.literal("set")
+                                            .then(ClientCommandManager.argument("milliseconds", IntegerArgumentType.integer(0))
+                                                    .executes(this::set)
+                                            )
+                            ).then(
+                                    ClientCommandManager.literal("add")
+                                            .then(ClientCommandManager.argument("milliseconds", IntegerArgumentType.integer(0))
+                                                    .executes(this::add)
+                                            )
+                            )
+                            .then(
                                     ClientCommandManager.literal("reset")
                                             .executes(this::reset)
                             )
@@ -40,6 +52,8 @@ public class TimerCommand {
         context.getSource().sendFeedback(Component.literal("/timer"));
         context.getSource().sendFeedback(Component.literal("    start - Starts the timer"));
         context.getSource().sendFeedback(Component.literal("    pause - Pauses the timer"));
+        context.getSource().sendFeedback(Component.literal("    set   - Sets the timer to a given value"));
+        context.getSource().sendFeedback(Component.literal("    add   - Adds a given amount to the timer"));
         context.getSource().sendFeedback(Component.literal("    reset - Resets and pauses the timer"));
         return 1;
         // AMBITIOUS TODO: Make every subcommand require a description so this can be generated automatically
@@ -65,8 +79,21 @@ public class TimerCommand {
         return 1;
     }
 
+    private int set(CommandContext<FabricClientCommandSource> context) {
+        int milliseconds = IntegerArgumentType.getInteger(context, "milliseconds");
+        timer.set(milliseconds);
+        context.getSource().sendFeedback(Component.literal("Timer set to " + milliseconds + "ms!"));
+        return 1;
+    }
+
+    private int add(CommandContext<FabricClientCommandSource> context) {
+        int milliseconds = IntegerArgumentType.getInteger(context, "milliseconds");
+        timer.set(timer.getMillis() + milliseconds);
+        context.getSource().sendFeedback(Component.literal("Timer set to " + milliseconds + "ms!"));
+        return 1;
+    }
+
     private int reset(CommandContext<FabricClientCommandSource> context) {
-        timer.pause();
         timer.reset();
         context.getSource().sendFeedback(Component.literal("Timer reset!"));
         return 1;
