@@ -2,7 +2,7 @@ package me.laazuli.timer.gui.screen;
 
 import me.laazuli.timer.TimeR;
 import me.laazuli.timer.gui.widget.DraggableStringWidget;
-import me.laazuli.timer.time.Timer;
+import me.laazuli.timer.timer.Timer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;

@@ -1,11 +1,11 @@
 package me.laazuli.timer;
 
-import me.laazuli.timer.time.SystemTimeTimer;
-import me.laazuli.timer.time.Timer;
+import me.laazuli.timer.timer.Timer;
+import me.laazuli.timer.timer.UpdateOnGetterTimer;
 
 public class Test {
     public static void main(String[] args) {
-        Timer timer = new SystemTimeTimer();
+        Timer timer = new UpdateOnGetterTimer();
         System.out.println("Timer created");
 
         timer.run();

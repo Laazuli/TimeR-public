@@ -1,4 +1,4 @@
-package me.laazuli.timer.time;
+package me.laazuli.timer.timer;
 
 public interface Timer {
     long getMillis();
