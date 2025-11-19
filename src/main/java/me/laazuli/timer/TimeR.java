@@ -2,16 +2,16 @@ package me.laazuli.timer;
 
 import me.laazuli.timer.command.TimerCommand;
 import me.laazuli.timer.renderer.SimpleTextRenderer;
-import me.laazuli.timer.timer.Timer;
+import me.laazuli.timer.timer.SimpleTimer;
 import me.laazuli.timer.timer.UpdateOnGetterTimer;
 import net.fabricmc.api.ClientModInitializer;
 
 public class TimeR implements ClientModInitializer {
     public static final String MOD_ID = "timer";
 
-    public static final Timer TIMER = new UpdateOnGetterTimer();
+    public static final SimpleTimer TIMER = new UpdateOnGetterTimer();
 
-    public static final SimpleTextRenderer RENDERER = new SimpleTextRenderer(MOD_ID, "timer", () -> Timer.formatTimer(TIMER));
+    public static final SimpleTextRenderer RENDERER = new SimpleTextRenderer(MOD_ID, "timer", () -> SimpleTimer.formatTimer(TIMER));
 
     public static final TimerCommand TIMER_COMMAND = new TimerCommand(TIMER);
 

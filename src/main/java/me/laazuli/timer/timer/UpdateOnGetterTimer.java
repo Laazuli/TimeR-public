@@ -1,6 +1,6 @@
 package me.laazuli.timer.timer;
 
-public class UpdateOnGetterTimer implements Timer {
+public class UpdateOnGetterTimer implements SimpleTimer {
     private boolean running;
     private long referencePoint;
     private long currentMilliseconds;

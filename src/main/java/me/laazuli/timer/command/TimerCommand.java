@@ -2,7 +2,7 @@ package me.laazuli.timer.command;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-import me.laazuli.timer.timer.Timer;
+import me.laazuli.timer.timer.SimpleTimer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
@@ -10,9 +10,9 @@ import net.minecraft.network.chat.Component;
 
 public class TimerCommand {
 
-    private final Timer timer;
+    private final SimpleTimer timer;
 
-    public TimerCommand(Timer timer) {
+    public TimerCommand(SimpleTimer timer) {
         this.timer = timer;
     }
 

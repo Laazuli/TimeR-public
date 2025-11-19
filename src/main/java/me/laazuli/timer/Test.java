@@ -1,11 +1,11 @@
 package me.laazuli.timer;
 
-import me.laazuli.timer.timer.Timer;
+import me.laazuli.timer.timer.SimpleTimer;
 import me.laazuli.timer.timer.UpdateOnGetterTimer;
 
 public class Test {
     public static void main(String[] args) {
-        Timer timer = new UpdateOnGetterTimer();
+        SimpleTimer timer = new UpdateOnGetterTimer();
         System.out.println("Timer created");
 
         timer.run();
@@ -29,7 +29,7 @@ public class Test {
         print(timer);
     }
 
-    public static void print(Timer timer) {
+    public static void print(SimpleTimer timer) {
         for (int i = 0; i < 50; i++) {
             System.out.println(/*"[" + new Date().getTime() + "] " + */timer.getMillis());
         }
