@@ -19,12 +19,16 @@ public class UpdateOnGetterTimer implements SimpleTimer {
 
     @Override
     public void run() {
+        if (running) return;
+
         referencePoint = System.currentTimeMillis();
         running = true;
     }
 
     @Override
     public void pause() {
+        if (!running) return;
+
         running = false;
         update();
         referencePoint = 0; // so errors would immediately be visible
