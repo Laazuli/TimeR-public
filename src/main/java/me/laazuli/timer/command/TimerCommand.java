@@ -89,7 +89,7 @@ public class TimerCommand {
     private int add(CommandContext<FabricClientCommandSource> context) {
         int milliseconds = IntegerArgumentType.getInteger(context, "milliseconds");
         timer.set(timer.getMillis() + milliseconds);
-        context.getSource().sendFeedback(Component.literal("Timer set to " + milliseconds + "ms!"));
+        context.getSource().sendFeedback(Component.literal("Added " + milliseconds + "ms!"));
         return 1;
     }
 
