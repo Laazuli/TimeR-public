@@ -17,7 +17,6 @@ public class TimerManager {
         ClientTickEvents.START_CLIENT_TICK.register(this::updateTimerState);
 
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-            System.out.println("Disconnect");
             this.pauseAndReset();
         });
     }
