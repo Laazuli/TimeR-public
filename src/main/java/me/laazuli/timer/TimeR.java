@@ -21,7 +21,7 @@ public class TimeR implements ClientModInitializer {
     public void onInitializeClient() {
         MANAGER.register();
 
-        RENDERER.initialize();
+        RENDERER.register();
 
         TIMER_COMMAND.register();
     }

@@ -16,9 +16,7 @@ public class TimerManager {
     public void register() {
         ClientTickEvents.START_CLIENT_TICK.register(this::updateTimerState);
 
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-            this.pauseAndReset();
-        });
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> this.pauseAndReset());
     }
 
     private void updateTimerState(Minecraft client) {
