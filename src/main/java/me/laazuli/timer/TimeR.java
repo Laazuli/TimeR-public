@@ -13,7 +13,7 @@ public class TimeR implements ClientModInitializer {
 
     public static final TimerManager MANAGER = new TimerManager(TIMER);
 
-    public static final SimpleTextRenderer RENDERER = new SimpleTextRenderer(MOD_ID, "timer", () -> SimpleTimer.formatTimer(TIMER));
+    public static final SimpleTextRenderer RENDERER = new SimpleTextRenderer(MOD_ID, "timer", () -> SimpleTimer.formatTimer(TIMER), 0, 0);
 
     public static final TimerCommand TIMER_COMMAND = new TimerCommand(TIMER);
 

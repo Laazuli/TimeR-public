@@ -13,29 +13,43 @@ public class SimpleTextRenderer {
     public final String namespace;
     public final String id;
     public final Supplier<String> textSupplier;
-    private double xPercent;
-    private double yPercent;
+    private int xOffset;
+    private int yOffset;
 
-    public SimpleTextRenderer(String namespace, String id, Supplier<String> textSupplier) {
+    public SimpleTextRenderer(String namespace, String id, Supplier<String> textSupplier, int xOffsetCenter, int yOffsetCenter) {
         this.namespace = namespace;
         this.id = id;
         this.textSupplier = textSupplier;
+        this.xOffset = xOffsetCenter;
+        this.yOffset = yOffsetCenter;
     }
 
-    public double getRelativeX() {
-        return xPercent;
+//    public SimpleTextRenderer(String namespace, String id, Supplier<String> textSupplier, int x, int y, int screenWidth, int screenHeight) {
+//        this(namespace, id, textSupplier, x - screenWidth / 2, y - screenHeight / 2);
+//    }
+
+    public int getxOffset() {
+        return xOffset;
     }
 
-    public double getRelativeY() {
-        return yPercent;
+    public int getyOffset() {
+        return yOffset;
     }
 
-    public void setRelativeX(double relativeX) {
-        this.xPercent = Math.clamp(relativeX, 0, 100);
+    public int getX(int screenWidth, int screenHeight) {
+        return this.xOffset + screenWidth/2;
     }
 
-    public void setRelativeY(double relativeY) {
-        this.yPercent = Math.clamp(relativeY, 0, 100);
+    public int getY(int screenWidth, int screenHeight) {
+        return this.yOffset + screenHeight/2;
+    }
+
+    public void setX(int x, int screenWidth, int screenHeight) {
+        this.xOffset = x - screenWidth / 2;
+    }
+
+    public void setY(int y, int screenWidth, int screenHeight) {
+        this.yOffset = y - screenHeight / 2;
     }
 
     public void register() {
@@ -48,12 +62,11 @@ public class SimpleTextRenderer {
         guiGraphics.drawStringWithBackdrop(
                 minecraft.font,
                 Component.literal(this.textSupplier.get()),
-                (int) (this.xPercent * guiGraphics.guiWidth()),
-                (int) (this.yPercent * guiGraphics.guiHeight()),
+                this.getX(guiGraphics.guiWidth(), guiGraphics.guiHeight()),
+                this.getY(guiGraphics.guiWidth(), guiGraphics.guiHeight()),
                 minecraft.font.width(this.textSupplier.get()),
                 -1);
 
         minecraft.getProfiler().pop();
     }
-
 }
