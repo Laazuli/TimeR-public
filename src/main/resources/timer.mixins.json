@@ -1,6 +1,0 @@
-{
-  "package": "me.laazuli.timer.mixin",
-  "client": [
-    "AddTimerSettingsButton"
-  ]
-}
