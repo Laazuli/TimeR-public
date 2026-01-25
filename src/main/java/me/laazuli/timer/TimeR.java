@@ -24,7 +24,8 @@ public class TimeR implements ClientModInitializer {
 
     public static final TimerCommand TIMER_COMMAND = new TimerCommand(TIMER);
 
-    public static final KeyMapping OPTIONS_SCREEN_KEYBIND = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.timer.options_screen", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, "key.categories.misc"));
+    public static final KeyMapping OPTIONS_SCREEN_KEYMAPPING = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.timer.options_screen", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, "key.categories.misc"));
+
 
     @Override
     public void onInitializeClient() {
@@ -34,13 +35,17 @@ public class TimeR implements ClientModInitializer {
 
         TIMER_COMMAND.register();
 
+        registerKeyMapping();
+    }
+
+    private void registerKeyMapping() {
         ClientTickEvents.START_WORLD_TICK.register(
                 clientLevel -> {
                     Minecraft minecraft = Minecraft.getInstance();
 
                     if (minecraft.screen instanceof TimerSettingsScreen) return;
 
-                    if (OPTIONS_SCREEN_KEYBIND.consumeClick()) {
+                    if (OPTIONS_SCREEN_KEYMAPPING.consumeClick()) {
                         minecraft.setScreen(new TimerSettingsScreen(minecraft.screen));
                     }
                 }
