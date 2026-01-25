@@ -2,6 +2,8 @@ package me.laazuli.timer;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import me.laazuli.timer.command.TimerCommand;
+import me.laazuli.timer.config.ConfigManager;
+import me.laazuli.timer.config.TimerConfig;
 import me.laazuli.timer.gui.screen.TimerSettingsScreen;
 import me.laazuli.timer.renderer.SimpleTextRenderer;
 import me.laazuli.timer.timer.SimpleTimer;
@@ -9,6 +11,7 @@ import me.laazuli.timer.timer.UpdateOnGetterTimer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.glfw.GLFW;
@@ -18,7 +21,9 @@ public class TimeR implements ClientModInitializer {
 
     public static final SimpleTimer TIMER = new UpdateOnGetterTimer();
 
-    public static final TimerManager MANAGER = new TimerManager(TIMER);
+    public static final TimerManager TIMER_MANAGER = new TimerManager(TIMER);
+
+    public static final ConfigManager CONFIG_MANAGER = new ConfigManager(FabricLoader.getInstance().getConfigDir());
 
     public static final SimpleTextRenderer RENDERER = new SimpleTextRenderer(MOD_ID, "timer", () -> SimpleTimer.formatTimer(TIMER), 0, 0);
 
@@ -29,7 +34,7 @@ public class TimeR implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        MANAGER.register();
+        TIMER_MANAGER.register();
 
         RENDERER.register();
 
